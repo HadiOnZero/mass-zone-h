@@ -7,6 +7,7 @@ Author: Hadi Ramdhani
 
 import sys
 import os
+import math
 import requests
 import threading
 import time
@@ -182,7 +183,7 @@ class ZoneHApp(QMainWindow):
                 color: #00ff00;
                 padding: 15px;
                 border: 1px solid rgba(0, 255, 0, 0.4);
-                border-radius: 15px;
+                border-radius: 20px;
                 background-color: rgba(0, 255, 0, 0.08);
                 backdrop-filter: blur(10px);
                 box-shadow:
@@ -260,7 +261,7 @@ class ZoneHApp(QMainWindow):
                 font-size: 11px;
                 padding: 10px 15px;
                 border: 1px solid rgba(255, 102, 0, 0.3);
-                border-radius: 20px;
+                border-radius: 25px;
                 backdrop-filter: blur(10px);
                 box-shadow:
                     0 0 15px rgba(255, 102, 0, 0.3),
@@ -299,7 +300,7 @@ class ZoneHApp(QMainWindow):
                 font-size: 11px;
                 padding: 10px 15px;
                 border: 1px solid rgba(102, 0, 255, 0.3);
-                border-radius: 20px;
+                border-radius: 25px;
                 backdrop-filter: blur(10px);
                 box-shadow:
                     0 0 15px rgba(102, 0, 255, 0.3),
@@ -338,7 +339,7 @@ class ZoneHApp(QMainWindow):
                 font-size: 11px;
                 padding: 10px 15px;
                 border: 1px solid rgba(255, 0, 255, 0.3);
-                border-radius: 20px;
+                border-radius: 25px;
                 backdrop-filter: blur(10px);
                 box-shadow:
                     0 0 15px rgba(255, 0, 255, 0.3),
@@ -383,7 +384,7 @@ class ZoneHApp(QMainWindow):
                 font-size: 12px;
                 padding: 12px 20px;
                 border: 1px solid rgba(0, 255, 0, 0.3);
-                border-radius: 25px;
+                border-radius: 30px;
                 backdrop-filter: blur(10px);
                 box-shadow:
                     0 0 20px rgba(0, 255, 0, 0.3),
@@ -430,7 +431,7 @@ class ZoneHApp(QMainWindow):
                 font-size: 12px;
                 padding: 12px 20px;
                 border: 1px solid rgba(255, 0, 0, 0.3);
-                border-radius: 25px;
+                border-radius: 30px;
                 backdrop-filter: blur(10px);
                 box-shadow:
                     0 0 20px rgba(255, 0, 0, 0.3),
@@ -476,7 +477,7 @@ class ZoneHApp(QMainWindow):
                 font-size: 12px;
                 padding: 12px 20px;
                 border: 1px solid rgba(0, 102, 204, 0.3);
-                border-radius: 25px;
+                border-radius: 30px;
                 backdrop-filter: blur(10px);
                 box-shadow:
                     0 0 20px rgba(0, 102, 204, 0.3),
@@ -513,7 +514,7 @@ class ZoneHApp(QMainWindow):
         self.progress_bar.setStyleSheet("""
             QProgressBar {
                 border: 1px solid rgba(0, 255, 0, 0.4);
-                border-radius: 15px;
+                border-radius: 20px;
                 text-align: center;
                 background-color: rgba(0, 0, 0, 0.3);
                 color: #00ff00;
@@ -549,7 +550,7 @@ class ZoneHApp(QMainWindow):
                 color: #00ff00;
                 font-family: 'Courier New', monospace;
                 border: 1px solid rgba(0, 255, 0, 0.3);
-                border-radius: 10px;
+                border-radius: 15px;
                 backdrop-filter: blur(5px);
                 box-shadow:
                     inset 0 0 20px rgba(0, 255, 0, 0.1),
@@ -604,7 +605,7 @@ class ZoneHApp(QMainWindow):
                 color: #00ff00;
                 gridline-color: rgba(0, 255, 0, 0.2);
                 border: 1px solid rgba(0, 255, 0, 0.3);
-                border-radius: 12px;
+                border-radius: 18px;
                 backdrop-filter: blur(5px);
                 box-shadow:
                     inset 0 0 15px rgba(0, 255, 0, 0.1),
@@ -652,7 +653,7 @@ class ZoneHApp(QMainWindow):
                     font-weight: bold;
                     padding: 8px 12px;
                     border: 1px solid rgba(0, 255, 0, 0.3);
-                    border-radius: 15px;
+                    border-radius: 20px;
                     background-color: rgba(0, 255, 0, 0.08);
                     backdrop-filter: blur(5px);
                     box-shadow:
@@ -737,7 +738,7 @@ class ZoneHApp(QMainWindow):
                 background-color: rgba(10, 10, 10, 0.7);
                 color: #00ff00;
                 border: 1px solid rgba(0, 255, 0, 0.4);
-                border-radius: 8px;
+                border-radius: 12px;
                 padding: 8px;
                 backdrop-filter: blur(5px);
                 box-shadow:
@@ -748,7 +749,7 @@ class ZoneHApp(QMainWindow):
                 background-color: rgba(10, 10, 10, 0.7);
                 color: #00ff00;
                 border: 1px solid rgba(0, 255, 0, 0.4);
-                border-radius: 8px;
+                border-radius: 12px;
                 padding: 5px;
                 backdrop-filter: blur(5px);
                 box-shadow:
@@ -759,7 +760,7 @@ class ZoneHApp(QMainWindow):
                 background-color: rgba(10, 10, 10, 0.7);
                 color: #00ff00;
                 border: 1px solid rgba(0, 255, 0, 0.4);
-                border-radius: 8px;
+                border-radius: 12px;
                 padding: 5px;
                 backdrop-filter: blur(5px);
                 box-shadow:
@@ -943,10 +944,75 @@ class ZoneHApp(QMainWindow):
             except Exception as e:
                 QMessageBox.critical(self, 'Error', f'Failed to export results: {str(e)}')
         
+    def start_glow_animation(self):
+        """Start the pulsing glow animation for buttons"""
+        self.glow_timer.timeout.connect(self.update_glow_effect)
+        self.glow_timer.start(100)  # Update every 100ms
+        
+    def update_glow_effect(self):
+        """Update the glow effect animation"""
+        self.glow_phase += 0.2
+        if self.glow_phase > 6.28:  # 2 * pi
+            self.glow_phase = 0
+            
+        # Calculate glow intensity using sine wave
+        intensity = (math.sin(self.glow_phase) + 1) / 2  # 0 to 1
+        glow_strength = 0.3 + (intensity * 0.4)  # 0.3 to 0.7
+        
+        # Update START button glow
+        if self.start_button.isEnabled():
+            glow_color = f"rgba(0, 255, 0, {glow_strength})"
+            self.start_button.setStyleSheet(f"""
+                QPushButton {{
+                    background-color: rgba(0, 255, 0, 0.15);
+                    color: #00ff00;
+                    font-weight: bold;
+                    font-size: 12px;
+                    padding: 12px 20px;
+                    border: 1px solid rgba(0, 255, 0, 0.3);
+                    border-radius: 30px;
+                    backdrop-filter: blur(10px);
+                    box-shadow:
+                        0 0 {20 + int(intensity * 15)}px {glow_color},
+                        inset 0 0 20px rgba(0, 255, 0, 0.1),
+                        0 4px 15px rgba(0, 0, 0, 0.3);
+                    transition: all 0.3s ease;
+                    text-shadow: 0 0 {10 + int(intensity * 5)}px rgba(0, 255, 0, 0.8);
+                }}
+                QPushButton:hover {{
+                    background-color: rgba(0, 255, 0, 0.25);
+                    border: 1px solid rgba(0, 255, 0, 0.6);
+                    box-shadow:
+                        0 0 30px rgba(0, 255, 0, 0.6),
+                        inset 0 0 30px rgba(0, 255, 0, 0.2),
+                        0 6px 20px rgba(0, 0, 0, 0.4);
+                    transform: translateY(-2px);
+                }}
+                QPushButton:pressed {{
+                    background-color: rgba(0, 255, 0, 0.1);
+                    box-shadow:
+                        0 0 10px rgba(0, 255, 0, 0.4),
+                        inset 0 0 15px rgba(0, 255, 0, 0.3),
+                        0 2px 8px rgba(0, 0, 0, 0.5);
+                    transform: translateY(1px);
+                }}
+                QPushButton:disabled {{
+                    background-color: rgba(100, 100, 100, 0.15);
+                    color: #666666;
+                    border: 1px solid rgba(100, 100, 100, 0.3);
+                    box-shadow: none;
+                    text-shadow: none;
+                }}
+            """)
+        
     def closeEvent(self, event):
         """Handle close event"""
+        # Stop glow animation
+        if self.glow_timer.isActive():
+            self.glow_timer.stop()
+            
         if self.mirror_thread and self.mirror_thread.isRunning():
-            reply = QMessageBox.question(self, 'Exit', 
+            reply = QMessageBox.question(self, 'Exit',
                                        'Mirror process is still running. Are you sure you want to exit?',
                                        QMessageBox.Yes | QMessageBox.No,
                                        QMessageBox.No)
