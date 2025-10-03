@@ -1,0 +1,19 @@
+# Zone-H Mass Mirror - Sample URLs
+# Add one URL per line
+# Lines starting with # are ignored
+
+# Example websites for testing
+http://httpbin.org/status/200
+http://httpbin.org/status/404
+https://httpbin.org/delay/2
+http://httpbin.org/html
+https://httpbin.org/json
+
+# More test URLs
+https://example.com
+http://example.org
+https://www.wikipedia.org
+http://neverssl.com
+
+# You can add your own targets here
+# Remember to use this tool responsibly and ethically
