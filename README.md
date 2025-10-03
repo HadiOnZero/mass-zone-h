@@ -1,5 +1,7 @@
 # Zone-H Mass Mirror Tool
 
+![Zone-H Mass Mirror Tool Screenshot](screenshot.png)
+
 Aplikasi desktop elegan untuk melakukan mass mirror terhadap notifikasi Zone-H dengan desain hacker ala-ala (hitam & biru).
 
 ## Fitur Utama
@@ -75,6 +77,43 @@ Aplikasi ini memiliki desain hacker dengan tema:
 - **Accent**: Hijau terang untuk elemen aktif
 - **Font**: Monospace untuk nuansa terminal
 - **Border**: Garis hijau untuk elemen-elemen UI
+
+## About App
+
+Aplikasi ini dilengkapi dengan halaman **About** yang komprehensif yang dapat diakses melalui:
+
+### Cara Akses About:
+1. **Menu Bar**: Klik `Help` → `About`
+2. **Tombol About**: Klik tombol `ABOUT` di UI utama
+3. **Status Bar**: Klik label `🛡️ About` di status bar
+
+### Fitur About Page:
+- 📋 **Informasi Aplikasi**: Nama, versi, author, dan deskripsi lengkap
+- ✨ **Daftar Fitur**: Semua fitur utama aplikasi dengan ikon
+- 🔧 **Technical Details**: Teknologi yang digunakan (Python, PyQt5, dll)
+- ⚠️ **Disclaimer**: Peringatan penggunaan yang bertanggung jawab
+- 🐙 **Tombol GitHub**: Akses ke repository (coming soon)
+- 📚 **Tombol Documentation**: Panduan penggunaan lengkap
+- 📧 **Tombol Contact**: Informasi kontak dan support
+- ✖ **Tombol Close**: Menutup dialog
+
+### Desain About:
+Halaman About mengikuti tema hacker yang konsisten dengan:
+- Background hitam dengan border hijau neon
+- Teks hijau dengan font monospace
+- Tombol-tombol dengan efek glow
+- Layout yang rapi dan profesional
+- Informasi yang terstruktur dan mudah dibaca
+
+### Informasi yang Ditampilkan:
+- **Version**: 1.0.0
+- **Author**: Hadi Ramdhani
+- **License**: MIT License
+- **Description**: Penjelasan lengkap tentang aplikasi
+- **Features**: 8 fitur utama dengan ikon emoji
+- **Technical Details**: Teknologi dan library yang digunakan
+- **Disclaimer**: Peringatan penggunaan yang bertanggung jawab
+- **Copyright**: © 2024 Hadi Ramdhani - Elite Hacker Tools
 
 ## Fitur Keamanan
 
