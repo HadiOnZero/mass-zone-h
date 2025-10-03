@@ -1,8 +1,12 @@
 # Zone-H Mass Mirror Tool
 
+<<<<<<< HEAD
 ![Zone-H Mass Mirror Tool Screenshot](screenshot.png)
 
 Aplikasi desktop elegan untuk melakukan mass mirror terhadap notifikasi Zone-H dengan desain hacker ala-ala (hitam & biru).
+=======
+Aplikasi desktop untuk melakukan mass mirror terhadap notifikasi Zone-H dengan desain hacker.
+>>>>>>> b8d624e681cde9a4b4a3616b5f6da035de9cb788
 
 ## Fitur Utama
 
