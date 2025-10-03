@@ -1,6 +1,6 @@
 # Zone-H Mass Mirror Tool
 
-![Zone-H Mass Mirror Tool Screenshot](screenshot.png)
+![Zone-H Mass Mirror Tool Screenshot](src/assets/screenshot.png)
 
 Aplikasi desktop elegan untuk melakukan mass mirror terhadap notifikasi Zone-H dengan desain hacker ala-ala (hitam & biru).
 =======
@@ -17,6 +17,35 @@ Aplikasi desktop untuk melakukan mass mirror terhadap notifikasi Zone-H dengan d
 - 🛡️ **Error Handling**: Penanganan error yang robust
 - 📝 **Logging**: Console log untuk debugging
 - 🔄 **Thread-safe**: Proses mirror berjalan di background thread
+- 🏆 **Top Rank Defacers**: Lihat ranking defacers teratas dari Zone-H
+
+## 📁 Project Structure
+
+```
+zone-h-mass-mirror/
+│
+├── src/                          # Source code utama
+│   ├── ui/                       # User Interface components
+│   │   ├── about_dialog.py       # About dialog dengan tema hacker
+│   │   └── top_rank_dialog.py    # Top Rank Defacers dialog
+│   ├── utils/                    # Utility functions & helpers
+│   │   ├── mirror_thread.py      # Mirror thread implementation
+│   │   ├── helpers.py            # Helper functions (validasi, export, dll)
+│   │   └── top_rank_fetcher.py   # Top rank data fetching
+│   ├── config/                   # Configuration & settings
+│   │   └── config.py             # Configuration constants
+│   └── assets/                   # Assets (images, icons, etc.)
+│       └── screenshot.png        # Application screenshot
+│
+├── main.py                       # Main application entry point
+├── requirements.txt              # Python dependencies
+├── setup.py                      # Setup/installation script
+├── README.md                     # Project documentation
+├── .gitignore                    # Git ignore rules
+├── run.bat                       # Windows launcher
+├── run.sh                        # Unix/Linux launcher
+└── sample_urls.txt              # Sample URLs for testing
+```
 
 ## Persyaratan Sistem
 
@@ -76,10 +105,10 @@ https://vulnerable-site.com/admin
 
 Aplikasi ini memiliki desain hacker dengan tema:
 - **Background**: Hitam pekat
-- **Text**: Hijau neon (mirip terminal hacker)
-- **Accent**: Hijau terang untuk elemen aktif
+- **Text**: Putih cerah (mirip terminal hacker modern)
+- **Accent**: Putih terang untuk elemen aktif
 - **Font**: Monospace untuk nuansa terminal
-- **Border**: Garis hijau untuk elemen-elemen UI
+- **Border**: Garis putih untuk elemen-elemen UI
 
 ## About App
 
@@ -102,8 +131,8 @@ Aplikasi ini dilengkapi dengan halaman **About** yang komprehensif yang dapat di
 
 ### Desain About:
 Halaman About mengikuti tema hacker yang konsisten dengan:
-- Background hitam dengan border hijau neon
-- Teks hijau dengan font monospace
+- Background hitam dengan border putih
+- Teks putih dengan font monospace
 - Tombol-tombol dengan efek glow
 - Layout yang rapi dan profesional
 - Informasi yang terstruktur dan mudah dibaca
@@ -117,6 +146,42 @@ Halaman About mengikuti tema hacker yang konsisten dengan:
 - **Technical Details**: Teknologi dan library yang digunakan
 - **Disclaimer**: Peringatan penggunaan yang bertanggung jawab
 - **Copyright**: © 2024 Hadi Ramdhani - Elite Hacker Tools
+
+## Top Rank Defacers
+
+Aplikasi ini dilengkapi dengan fitur **Top Rank Defacers** yang menampilkan ranking defacers teratas dari Zone-H archive.
+
+### Cara Akses Top Rank:
+1. **Menu Bar**: Klik `Tools` → `Top Rank Defacers`
+2. **Tombol TOP RANK**: Klik tombol `TOP RANK` di UI utama
+
+### Fitur Top Rank Dialog:
+- 🏆 **Real-time Scraping**: Mengambil data ranking langsung dari Zone-H
+- 📊 **Tabel Ranking**: Menampilkan rank, nama defacer, negara, jumlah mirror, dan status
+- 🎨 **Color Coding**:
+  - 🥇 **Rank 1**: Warna gold (emas)
+  - 🥈 **Rank 2**: Warna silver (perak)
+  - 🥉 **Rank 3**: Warna bronze (perunggu)
+- 🌍 **Country Detection**: Menampilkan negara asal defacer
+- 🎯 **Specialty Classification**: Mengkategorikan keahlian defacer
+- 💾 **Export Data**: Menyimpan data ranking ke file
+- 🔄 **Refresh Button**: Memperbarui data terbaru
+
+### Desain Top Rank:
+Dialog Top Rank mengikuti tema hacker yang konsisten dengan:
+- Background hitam dengan border putih
+- Teks putih dengan font monospace
+- Tombol-tombol dengan efek glow putih
+- Tabel dengan styling khusus untuk top 3 ranks
+- Header yang mencolok dengan gradasi warna
+
+### Data yang Ditampilkan:
+- **Rank**: Peringkat defacer (1-50)
+- **Defacer Name**: Nama alias defacer
+- **Country**: Negara asal dengan icon bendera
+- **Mirror Count**: Jumlah mirror yang berhasil
+- **Specialty**: Kategori keahlian (SQLi, XSS, LFI, RFI, dll)
+- **Status**: Status aktifitas defacer (Active/Inactive)
 
 ## Fitur Keamanan
 

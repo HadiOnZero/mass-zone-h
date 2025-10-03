@@ -1,0 +1,29 @@
+[
+  {
+    "country": "🇮🇩 Indonesia",
+    "last_active": "2025-10-03",
+    "mirrors": 1250,
+    "name": "xHackerElite",
+    "rank": 1,
+    "specialty": "Government Sites",
+    "status": "Active"
+  },
+  {
+    "country": "🇷🇺 Russia",
+    "last_active": "2025-10-03",
+    "mirrors": 1180,
+    "name": "CyberGhost",
+    "rank": 2,
+    "specialty": "Corporate Sites",
+    "status": "Active"
+  },
+  {
+    "country": "🇧🇷 Brazil",
+    "last_active": "2025-10-03",
+    "mirrors": 1050,
+    "name": "DarkPhoenix",
+    "rank": 3,
+    "specialty": "Educational Sites",
+    "status": "Active"
+  }
+]
