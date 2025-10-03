@@ -124,7 +124,7 @@ Aplikasi ini dilengkapi dengan halaman **About** yang komprehensif yang dapat di
 - ✨ **Daftar Fitur**: Semua fitur utama aplikasi dengan ikon
 - 🔧 **Technical Details**: Teknologi yang digunakan (Python, PyQt5, dll)
 - ⚠️ **Disclaimer**: Peringatan penggunaan yang bertanggung jawab
-- 🐙 **Tombol GitHub**: Akses ke repository (coming soon)
+- 🐙 **Tombol GitHub**: Akses ke repository GitHub
 - 📚 **Tombol Documentation**: Panduan penggunaan lengkap
 - 📧 **Tombol Contact**: Informasi kontak dan support
 - ✖ **Tombol Close**: Menutup dialog

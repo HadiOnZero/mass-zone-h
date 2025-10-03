@@ -10,12 +10,14 @@ zone-h-mass-mirror/
 │   │
 │   ├── ui/                      # User Interface components
 │   │   ├── __init__.py         # UI package exports
-│   │   └── about_dialog.py     # About dialog component
+│   │   ├── about_dialog.py     # About dialog component
+│   │   └── top_rank_dialog.py  # Top Rank Defacers dialog
 │   │
 │   ├── utils/                   # Utility functions & helpers
 │   │   ├── __init__.py         # Utils package exports
 │   │   ├── mirror_thread.py    # Mirror thread implementation
-│   │   └── helpers.py          # Helper functions
+│   │   ├── helpers.py          # Helper functions
+│   │   └── top_rank_fetcher.py # Top rank data fetching
 │   │
 │   ├── config/                  # Configuration & settings
 │   │   ├── __init__.py         # Config package exports
@@ -54,6 +56,13 @@ zone-h-mass-mirror/
   - Tombol GitHub, Documentation, Contact
   - Styling konsisten dengan tema hacker
 
+- **`top_rank_dialog.py`** - Top Rank Defacers dialog
+  - Class `TopRankDialog` untuk menampilkan ranking defacers
+  - Class `TopRankFetcher` untuk scraping data dari Zone-H
+  - Tabel ranking dengan color coding untuk top 3
+  - Fitur export data dan refresh
+  - Styling hacker theme dengan warna putih
+
 #### Utilities (`src/utils/`)
 - **`mirror_thread.py`** - Thread implementation
   - Class `ZoneHMirror` untuk proses mass mirror
@@ -69,6 +78,13 @@ zone-h-mass-mirror/
   - `load_urls_from_file()` - Load URLs dari file
   - `calculate_success_rate()` - Hitung tingkat keberhasilan
   - `generate_report()` - Generate laporan lengkap
+
+- **`top_rank_fetcher.py`** - Top rank data fetching
+  - Class `TopRankFetcher` untuk scraping Zone-H
+  - Method `extract_defacer_name()` - Ekstrak nama defacer
+  - Method `detect_country()` - Deteksi negara defacer
+  - Method `detect_specialty()` - Klasifikasi keahlian
+  - Method `calculate_mirrors()` - Hitung jumlah mirror
 
 #### Configuration (`src/config/`)
 - **`config.py`** - Configuration constants
@@ -88,7 +104,7 @@ zone-h-mass-mirror/
 from src.config import DEFAULT_SETTINGS, USER_AGENTS, ERROR_MESSAGES
 from src.utils import (validate_url, sanitize_url, ZoneHMirror, 
                       save_results_to_json, save_results_to_csv)
-from src.ui import AboutDialog
+from src.ui import AboutDialog, TopRankDialog
 ```
 
 ## 🎯 Best Practices

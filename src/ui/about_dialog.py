@@ -157,7 +157,9 @@ class AboutDialog(QDialog):
         """)
         button_layout.addWidget(docs_button)
         
-        # Contact button
+        # 
+        # 
+        #  button
         contact_button = QPushButton("📧 Contact")
         contact_button.clicked.connect(self.open_contact)
         contact_button.setStyleSheet("""
@@ -212,7 +214,9 @@ class AboutDialog(QDialog):
         
     def open_github(self):
         """Buka halaman GitHub"""
-        QMessageBox.information(self, "GitHub", "Coming soon! Repository GitHub akan segera tersedia.")
+        import webbrowser
+        webbrowser.open("https://github.com/HadiOnZero/mass-zone-h")
+        QMessageBox.information(self, "GitHub", "Opening GitHub repository...")
         
     def open_documentation(self):
         """Buka dokumentasi"""
@@ -259,8 +263,8 @@ Gunakan dengan bijak dan sesuai hukum yang berlaku.
 📄 License: MIT License
 
 💬 Untuk pertanyaan, saran, atau laporan bug:
-• Email: hadiramdhani@example.com
-• GitHub: Coming soon!
+• Email: hadsxdev@gmail.com
+• GitHub: https://github.com/HadiOnZero/mass-zone-h
 • Forum: Coming soon!
 
 🌟 Jika Anda merasa aplikasi ini bermanfaat:
