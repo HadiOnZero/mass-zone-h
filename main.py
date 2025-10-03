@@ -19,7 +19,8 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QHBoxLayout, QPushButton, QTextEdit, QLineEdit,
                              QLabel, QProgressBar, QTableWidget, QTableWidgetItem,
                              QHeaderView, QMessageBox, QSplitter, QGroupBox,
-                             QCheckBox, QSpinBox, QComboBox, QFileDialog)
+                             QCheckBox, QSpinBox, QComboBox, QFileDialog, QDialog,
+                             QDialogButtonBox, QTextBrowser)
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
 from PyQt5.QtGui import QFont, QPalette, QColor, QIcon, QPixmap
 
@@ -28,6 +29,280 @@ from config import DEFAULT_SETTINGS, USER_AGENTS, ERROR_MESSAGES, SUCCESS_MESSAG
 from utils import (validate_url, sanitize_url, extract_domain, get_url_info,
                   save_results_to_json, save_results_to_csv, load_urls_from_file,
                   calculate_success_rate, generate_report)
+
+class AboutDialog(QDialog):
+    """About Dialog untuk Zone-H Mass Mirror Tool"""
+    
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("About Zone-H Mass Mirror Tool")
+        self.setFixedSize(500, 600)
+        self.setModal(True)
+        self.init_ui()
+        self.apply_hacker_theme()
+        
+    def init_ui(self):
+        """Inisialisasi UI about dialog"""
+        layout = QVBoxLayout()
+        
+        # Header dengan logo/teks
+        header_label = QLabel("ZONE-H MASS MIRROR")
+        header_label.setAlignment(Qt.AlignCenter)
+        header_label.setStyleSheet("""
+            QLabel {
+                font-size: 24px;
+                font-weight: bold;
+                color: #00ff00;
+                padding: 20px;
+                margin: 10px;
+                border: 2px solid rgba(0, 255, 0, 0.6);
+                border-radius: 15px;
+                background-color: rgba(0, 255, 0, 0.1);
+                text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+                letter-spacing: 3px;
+            }
+        """)
+        layout.addWidget(header_label)
+        
+        # Informasi aplikasi
+        info_text = f"""
+        <div style='color: #00ff00; font-family: "Courier New", monospace;'>
+        <h3 style='color: #00ff00; text-align: center;'>🛡️ Zone-H Mass Mirror Tool 🛡️</h3>
+        
+        <p><strong>Version:</strong> 1.0.0</p>
+        <p><strong>Author:</strong> Hadi Ramdhani</p>
+        <p><strong>License:</strong> MIT License</p>
+        
+        <h4 style='color: #00ff00;'>📋 Description:</h4>
+        <p>Aplikasi desktop elegan untuk melakukan mass mirror terhadap notifikasi Zone-H
+        dengan desain hacker ala-ala (hitam & hijau).</p>
+        
+        <h4 style='color: #00ff00;'>✨ Features:</h4>
+        <ul>
+            <li>🎯 Mass Mirror multiple URLs secara bersamaan</li>
+            <li>🎨 Desain Hacker dengan tema hitam dan hijau neon</li>
+            <li>📊 Real-time Progress monitoring</li>
+            <li>📈 Statistik hasil mirror yang detail</li>
+            <li>⚙️ Customizable Settings (delay, timeout, user agent)</li>
+            <li>🛡️ Robust Error Handling</li>
+            <li>📝 Console log untuk debugging</li>
+            <li>🔄 Thread-safe operation</li>
+        </ul>
+        
+        <h4 style='color: #00ff00;'>🔧 Technical Details:</h4>
+        <ul>
+            <li>Built with Python 3.6+</li>
+            <li>GUI Framework: PyQt5</li>
+            <li>HTTP Library: requests</li>
+            <li>HTML Parser: BeautifulSoup4</li>
+            <li>Multi-threading support</li>
+        </ul>
+        
+        <h4 style='color: #00ff00;'>⚠️ Disclaimer:</h4>
+        <p><em>Aplikasi ini dibuat untuk keperluan edukasi dan testing keamanan.
+        Pengguna bertanggung jawab atas penggunaannya sesuai dengan hukum yang berlaku.</em></p>
+        
+        <p style='text-align: center; margin-top: 20px;'>
+        <strong>© 2024 Hadi Ramdhani - Elite Hacker Tools</strong>
+        </p>
+        </div>
+        """
+        
+        # Text browser untuk konten
+        text_browser = QTextBrowser()
+        text_browser.setHtml(info_text)
+        text_browser.setStyleSheet("""
+            QTextBrowser {
+                background-color: rgba(0, 0, 0, 0.8);
+                color: #00ff00;
+                border: 1px solid rgba(0, 255, 0, 0.4);
+                border-radius: 10px;
+                padding: 15px;
+                font-family: 'Courier New', monospace;
+                font-size: 12px;
+                line-height: 1.5;
+            }
+        """)
+        layout.addWidget(text_browser)
+        
+        # Additional buttons
+        button_layout = QHBoxLayout()
+        
+        # GitHub button
+        github_button = QPushButton("🐙 GitHub")
+        github_button.clicked.connect(self.open_github)
+        github_button.setStyleSheet("""
+            QPushButton {
+                background-color: rgba(102, 0, 255, 0.2);
+                color: #bb88ff;
+                font-weight: bold;
+                padding: 8px 15px;
+                border: 1px solid rgba(102, 0, 255, 0.5);
+                border-radius: 15px;
+                text-shadow: 0 0 5px rgba(187, 136, 255, 0.8);
+                margin: 2px;
+            }
+            QPushButton:hover {
+                background-color: rgba(102, 0, 255, 0.3);
+                border: 1px solid rgba(102, 0, 255, 0.8);
+            }
+            QPushButton:pressed {
+                background-color: rgba(102, 0, 255, 0.1);
+            }
+        """)
+        button_layout.addWidget(github_button)
+        
+        # Documentation button
+        docs_button = QPushButton("📚 Documentation")
+        docs_button.clicked.connect(self.open_documentation)
+        docs_button.setStyleSheet("""
+            QPushButton {
+                background-color: rgba(0, 102, 204, 0.2);
+                color: #44aaff;
+                font-weight: bold;
+                padding: 8px 15px;
+                border: 1px solid rgba(0, 102, 204, 0.5);
+                border-radius: 15px;
+                text-shadow: 0 0 5px rgba(68, 170, 255, 0.8);
+                margin: 2px;
+            }
+            QPushButton:hover {
+                background-color: rgba(0, 102, 204, 0.3);
+                border: 1px solid rgba(0, 102, 204, 0.8);
+            }
+            QPushButton:pressed {
+                background-color: rgba(0, 102, 204, 0.1);
+            }
+        """)
+        button_layout.addWidget(docs_button)
+        
+        # Contact button
+        contact_button = QPushButton("📧 Contact")
+        contact_button.clicked.connect(self.open_contact)
+        contact_button.setStyleSheet("""
+            QPushButton {
+                background-color: rgba(255, 102, 0, 0.2);
+                color: #ff8844;
+                font-weight: bold;
+                padding: 8px 15px;
+                border: 1px solid rgba(255, 102, 0, 0.5);
+                border-radius: 15px;
+                text-shadow: 0 0 5px rgba(255, 136, 68, 0.8);
+                margin: 2px;
+            }
+            QPushButton:hover {
+                background-color: rgba(255, 102, 0, 0.3);
+                border: 1px solid rgba(255, 102, 0, 0.8);
+            }
+            QPushButton:pressed {
+                background-color: rgba(255, 102, 0, 0.1);
+            }
+        """)
+        button_layout.addWidget(contact_button)
+        
+        button_layout.addStretch()
+        
+        # Close button
+        close_button = QPushButton("✖ Close")
+        close_button.clicked.connect(self.accept)
+        close_button.setStyleSheet("""
+            QPushButton {
+                background-color: rgba(255, 0, 0, 0.2);
+                color: #ff4444;
+                font-weight: bold;
+                padding: 8px 20px;
+                border: 1px solid rgba(255, 0, 0, 0.5);
+                border-radius: 15px;
+                text-shadow: 0 0 5px rgba(255, 68, 68, 0.8);
+                margin: 2px;
+            }
+            QPushButton:hover {
+                background-color: rgba(255, 0, 0, 0.3);
+                border: 1px solid rgba(255, 0, 0, 0.8);
+            }
+            QPushButton:pressed {
+                background-color: rgba(255, 0, 0, 0.1);
+            }
+        """)
+        button_layout.addWidget(close_button)
+        
+        layout.addLayout(button_layout)
+        self.setLayout(layout)
+        
+    def open_github(self):
+        """Buka halaman GitHub"""
+        QMessageBox.information(self, "GitHub", "Coming soon! Repository GitHub akan segera tersedia.")
+        
+    def open_documentation(self):
+        """Buka dokumentasi"""
+        documentation_text = """
+🛡️ ZONE-H MASS MIRROR TOOL - DOCUMENTATION
+
+📋 PENDAHULUAN
+Aplikasi ini dirancang untuk melakukan mass mirror terhadap notifikasi Zone-H
+dengan antarmuka yang elegan dan fitur yang lengkap.
+
+🔧 CARA PENGGUNAAN:
+1. Masukkan URLs target di area input (satu per baris)
+2. Atur pengaturan (delay, timeout, user agent)
+3. Klik START MIRROR untuk memulai
+4. Monitor progress di progress bar
+5. Lihat hasil di tabel kanan
+
+⚙️ PENGATURAN:
+• Delay: Waktu tunggu antar request (1-10 detik)
+• Timeout: Batas waktu request (5-60 detik)
+• User Agent: Pilih user agent yang digunakan
+
+📊 FITUR:
+• Mass mirror multiple URLs
+• Real-time progress monitoring
+• Export hasil ke JSON/CSV
+• Error handling yang robust
+• Thread-safe operation
+
+⚠️ DISCLAIMER:
+Aplikasi ini untuk keperluan edukasi dan testing keamanan.
+Gunakan dengan bijak dan sesuai hukum yang berlaku.
+        """
+        QMessageBox.information(self, "Documentation", documentation_text)
+        
+    def open_contact(self):
+        """Buka informasi kontak"""
+        contact_text = """
+📧 CONTACT INFORMATION
+
+👨‍💻 Author: Hadi Ramdhani
+🏢 Organization: Elite Hacker Tools
+📅 Version: 1.0.0
+📄 License: MIT License
+
+💬 Untuk pertanyaan, saran, atau laporan bug:
+• Email: hadiramdhani@example.com
+• GitHub: Coming soon!
+• Forum: Coming soon!
+
+🌟 Jika Anda merasa aplikasi ini bermanfaat:
+• Berikan bintang di GitHub
+• Share ke teman-teman
+• Donasi untuk support pengembangan
+
+⚠️ IMPORTANT:
+Aplikasi ini dibuat untuk keperluan edukasi.
+Pengguna bertanggung jawab atas penggunaannya.
+        """
+        QMessageBox.information(self, "Contact", contact_text)
+        
+    def apply_hacker_theme(self):
+        """Terapkan tema hacker untuk about dialog"""
+        self.setStyleSheet("""
+            QDialog {
+                background-color: #000000;
+                color: #00ff00;
+                border: 2px solid rgba(0, 255, 0, 0.6);
+                border-radius: 20px;
+            }
+        """)
 
 class ZoneHMirror(QThread):
     """Thread untuk proses mass mirror"""
@@ -506,6 +781,46 @@ class ZoneHApp(QMainWindow):
         """)
         button_layout.addWidget(self.clear_button)
         
+        # About button
+        self.about_button = QPushButton("ABOUT")
+        self.about_button.clicked.connect(self.show_about)
+        self.about_button.setStyleSheet("""
+            QPushButton {
+                background-color: rgba(255, 215, 0, 0.15);
+                color: #ffd700;
+                font-weight: bold;
+                font-size: 12px;
+                padding: 12px 20px;
+                border: 1px solid rgba(255, 215, 0, 0.3);
+                border-radius: 30px;
+                backdrop-filter: blur(10px);
+                box-shadow:
+                    0 0 20px rgba(255, 215, 0, 0.3),
+                    inset 0 0 20px rgba(255, 215, 0, 0.1),
+                    0 4px 15px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s ease;
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            }
+            QPushButton:hover {
+                background-color: rgba(255, 215, 0, 0.25);
+                border: 1px solid rgba(255, 215, 0, 0.6);
+                box-shadow:
+                    0 0 30px rgba(255, 215, 0, 0.6),
+                    inset 0 0 30px rgba(255, 215, 0, 0.2),
+                    0 6px 20px rgba(0, 0, 0, 0.4);
+                transform: translateY(-2px);
+            }
+            QPushButton:pressed {
+                background-color: rgba(255, 215, 0, 0.1);
+                box-shadow:
+                    0 0 10px rgba(255, 215, 0, 0.4),
+                    inset 0 0 15px rgba(255, 215, 0, 0.3),
+                    0 2px 8px rgba(0, 0, 0, 0.5);
+                transform: translateY(1px);
+            }
+        """)
+        button_layout.addWidget(self.about_button)
+        
         left_layout.addLayout(button_layout)
         
         # Progress bar
@@ -778,6 +1093,91 @@ class ZoneHApp(QMainWindow):
             }
         """)
         
+        # Menu bar
+        self.create_menu_bar()
+        
+    def create_menu_bar(self):
+        """Buat menu bar dengan opsi About"""
+        menubar = self.menuBar()
+        
+        # Help menu
+        help_menu = menubar.addMenu('Help')
+        
+        # About action
+        about_action = help_menu.addAction('About')
+        about_action.triggered.connect(self.show_about)
+        
+        # Style the menu bar
+        menubar.setStyleSheet("""
+            QMenuBar {
+                background-color: rgba(0, 0, 0, 0.9);
+                color: #00ff00;
+                border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+                font-family: 'Courier New', monospace;
+                font-size: 12px;
+            }
+            QMenuBar::item {
+                background-color: transparent;
+                padding: 6px 10px;
+                margin: 2px;
+                border-radius: 5px;
+            }
+            QMenuBar::item:selected {
+                background-color: rgba(0, 255, 0, 0.2);
+                border: 1px solid rgba(0, 255, 0, 0.4);
+            }
+            QMenu {
+                background-color: rgba(0, 0, 0, 0.95);
+                color: #00ff00;
+                border: 1px solid rgba(0, 255, 0, 0.4);
+                border-radius: 8px;
+                font-family: 'Courier New', monospace;
+                font-size: 11px;
+            }
+            QMenu::item {
+                padding: 8px 20px;
+                border-radius: 5px;
+            }
+            QMenu::item:selected {
+                background-color: rgba(0, 255, 0, 0.3);
+                border: 1px solid rgba(0, 255, 0, 0.6);
+            }
+        """)
+        
+    def show_about(self):
+        """Tampilkan about dialog"""
+        about_dialog = AboutDialog(self)
+        about_dialog.exec_()
+        
+    def show_help_quick(self):
+        """Tampilkan help cepat"""
+        help_text = """
+🛡️ ZONE-H MASS MIRROR TOOL - QUICK HELP
+
+🔧 LANGKAH PENGGUNAAN:
+1. Masukkan URLs di area input (satu per baris)
+2. Atur delay dan timeout sesuai kebutuhan
+3. Pilih user agent yang sesuai
+4. Klik START MIRROR untuk memulai
+5. Monitor progress di progress bar
+6. Lihat hasil di tabel kanan
+
+📊 FITUR UTAMA:
+• Mass mirror multiple URLs
+• Real-time progress monitoring
+• Export hasil ke JSON/CSV
+• Error handling yang robust
+• Thread-safe operation
+
+⚠️ TIPS:
+• Gunakan delay 2-3 detik untuk hasil optimal
+• Periksa koneksi internet sebelum mulai
+• Validasi URLs untuk menghindari error
+
+💡 KLIK "About" untuk info lebih lanjut!
+        """
+        QMessageBox.information(self, "Quick Help", help_text)
+        
     def start_mirror(self):
         """Mulai proses mass mirror"""
         # Ambil URLs dari input
@@ -883,6 +1283,14 @@ class ZoneHApp(QMainWindow):
         self.progress_bar.setValue(0)
         self.results.clear()
         self.update_statistics()
+        # Quick help button in status bar
+        self.statusBar().addPermanentWidget(QLabel(" | "))
+        help_label = QLabel("🛡️ About")
+        help_label.setStyleSheet("color: #00ff00; font-weight: bold;")
+        help_label.setToolTip("Click to open About dialog")
+        help_label.mousePressEvent = lambda event: self.show_about()
+        self.statusBar().addPermanentWidget(help_label)
+        
         self.statusBar().showMessage('Ready - Zone-H Mass Mirror Tool v1.0')
         
     def load_urls_from_file(self):
